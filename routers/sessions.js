@@ -29,13 +29,15 @@ router.post('/', async (req, res) => {
   }
   else {
     //render the same sign in form, with the error message
-   res.render('sessions/new', { errors: ["???"] })
+   res.render('sessions/new', { errors: ["sorry, details not valid"] })
   }
 })
 
 router.delete('/', (req, res) => {
+
+  delete req.session.userId
   // delete the user id from the session
-  res.redirect.userId = undefined;
+  
   res.redirect('/')
 })
 
