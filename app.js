@@ -28,11 +28,12 @@ app.use(async (req, res, next) => {
         id: req.session.userId
       }
     }
-    //console.log(res.locals.currentUser);
+    
     )
   } else {
     res.locals.currentUser = undefined
   }
+  console.log(res.locals.currentUser);
   res.locals.errors = []
   next()
 })
