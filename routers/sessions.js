@@ -10,15 +10,22 @@ router.get('/new', (req, res) => {
 
 router.post('/', async (req, res) => {
   // find user by email
+
+  const currentUser = User.findAll({
+    where: {
+      email: req.body.email
+    }
+  })
+
   // if user exists, and using bcryptjs the password is equal to the password in the request body
-  if () {
+  //if () {
     // add user id to the session
     // redirect to '/top-secret'
-  }
-  else {
+  //}
+  //else {
     // render the same sign in form, with the error message
-    res.render('sessions/new', { errors: ["???"] })
-  }
+  //  res.render('sessions/new', { errors: ["???"] })
+  //}
 })
 
 router.delete('/', (req, res) => {
