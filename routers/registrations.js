@@ -20,17 +20,21 @@ router.post('/', async (req, res) => {
     passwordHash: passwordHash
   })
 
-  const newUser = User.findAll({
+  const newUser = await User.findAll({
     where: {
       email: req.body.email
     }
   })
 
+  console.log("newUser");
   console.log(newUser);
+  console.log(newUser[0].id);
 
-  req.session.userId = newUser.id
+  req.session.userId = newUser[0].id
 
-  res.redirect('/top-secret');
+  res.redirect('/top-secret',{
+    currentUser: newUser
+  });
 
 })
 
