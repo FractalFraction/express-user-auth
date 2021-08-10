@@ -11,25 +11,31 @@ router.get('/new', (req, res) => {
 router.post('/', async (req, res) => {
   // find user by email
 
-  // const currentUser = User.findAll({
-  //   where: {
-  //     email: req.body.email
-  //   }
-  // })
+  const currentUser = await User.findOne({
+    where: {
+      email: req.body.email
+    }
+  })
+
+  console.log(currentUser);
+  //console.log(
 
   // if user exists, and using bcryptjs the password is equal to the password in the request body
-  //if () {
-    // add user id to the session
-    // redirect to '/top-secret'
-  //}
-  //else {
-    // render the same sign in form, with the error message
-  //  res.render('sessions/new', { errors: ["???"] })
-  //}
+  if (currentUser && bcrypt.compareSync(req.body.password, currentUser.passwordHash)) {
+    //add user id to the session
+    req.session.userId = currentUser.id;
+    //redirect to '/top-secret'
+    res.redirect('/top-secret');
+  }
+  else {
+    //render the same sign in form, with the error message
+   res.render('sessions/new', { errors: ["???"] })
+  }
 })
 
 router.delete('/', (req, res) => {
   // delete the user id from the session
+  res.redirect.userId = undefined;
   res.redirect('/')
 })
 
