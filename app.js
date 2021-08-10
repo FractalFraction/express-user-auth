@@ -27,7 +27,9 @@ app.use(async (req, res, next) => {
       where: {
         id: req.session.userId
       }
-    })
+    }
+    //console.log(res.locals.currentUser);
+    )
   } else {
     res.locals.currentUser = undefined
   }

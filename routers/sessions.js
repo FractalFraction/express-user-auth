@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router({mergeParams: true})
 const { User } = require('../models')
 // require module 'bcryptjs'
-const bcryptjs = require('bcryptjs')
+const bcrypt = require('bcryptjs')
 
 router.get('/new', (req, res) => {
   res.render('sessions/new')
@@ -11,11 +11,11 @@ router.get('/new', (req, res) => {
 router.post('/', async (req, res) => {
   // find user by email
 
-  const currentUser = User.findAll({
-    where: {
-      email: req.body.email
-    }
-  })
+  // const currentUser = User.findAll({
+  //   where: {
+  //     email: req.body.email
+  //   }
+  // })
 
   // if user exists, and using bcryptjs the password is equal to the password in the request body
   //if () {

@@ -15,26 +15,25 @@ router.post('/', async (req, res) => {
 
   const passwordHash = bcrypt.hashSync(req.body.password);
 
-  await User.create({
+  const newUser = await User.create({
     email: req.body.email,
     passwordHash: passwordHash
   })
 
-  const newUser = await User.findAll({
-    where: {
-      email: req.body.email
-    }
-  })
+  // const newUser = await User.findAll({
+  //   where: {
+  //     email: req.body.email
+  //   }
+  // })
 
-  console.log("newUser");
+  // console.log("newUser");
   console.log(newUser);
-  console.log(newUser[0].id);
+  console.log(newUser.id)
+  // console.log(newUser[0].id);
 
-  req.session.userId = newUser[0].id
+  req.session.userId = newUser.id
 
-  res.redirect('/top-secret',{
-    currentUser: newUser
-  });
+  res.redirect('/top-secret');
 
 })
 
